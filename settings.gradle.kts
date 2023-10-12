@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "compositebuildsample"
+rootProject.name = "composite-build-sample"
 include(":app")
