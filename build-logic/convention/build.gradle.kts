@@ -25,14 +25,9 @@ gradlePlugin {
             id = "compositebuildsample.android.library"
             implementationClass = "com.example.compositebuildsample.AndroidLibraryPlugin"
         }
+        register("androidLibraryCompose") {
+            id = "compositebuildsample.android.library.compose"
+            implementationClass = "com.example.compositebuildsample.AndroidLibraryComposePlugin"
+        }
     }
 }
-//dependencies {
-//    implementation(libs.androidxCoreCoreKtx)
-//    implementation(libs.androidxLifecycleLifecycleRuntimeKtx)
-//    implementation(libs.androidxActivityActivityCompose)
-//    implementation(libs.junit)
-//    implementation(libs.androidxTestExtJunit)
-//    implementation(libs.androidxTestEspressoEspressoCore)
-//    implementation(libs.androidxComposeComposeBom)
-//}
