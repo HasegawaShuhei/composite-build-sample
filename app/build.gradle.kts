@@ -30,6 +30,7 @@ android {
 dependencies {
 
     implementation(project(":feature:list"))
+    implementation(project(":feature:detail"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.compose.material3)

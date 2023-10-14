@@ -9,6 +9,8 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:detail"))
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.navigation.compose)
 }
