@@ -1,5 +1,6 @@
 plugins {
     id("compositebuildsample.android.library")
+    id("compositebuildsample.android.library.compose")
 }
 
 android {
