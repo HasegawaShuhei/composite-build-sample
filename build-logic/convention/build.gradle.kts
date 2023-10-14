@@ -33,5 +33,9 @@ gradlePlugin {
             id = "compositebuildsample.android.hilt"
             implementationClass = "com.example.compositebuildsample.AndroidHiltPlugin"
         }
+        register("androidRoom") {
+            id = "compositebuildsample.android.room"
+            implementationClass = "com.example.compositebuildsample.AndroidRoomPlugin"
+        }
     }
 }
