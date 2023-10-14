@@ -18,3 +18,4 @@ rootProject.name = "composite-build-sample"
 include(":app")
 include(":feature:detail")
 include(":feature:list")
+include(":core:database")
