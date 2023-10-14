@@ -12,8 +12,8 @@ fun NavController.navigateToList(navOptions: NavOptions? = null) {
     this.navigate(listRoute, navOptions)
 }
 
-fun NavGraphBuilder.listScreen() {
+fun NavGraphBuilder.listScreen(navController: NavController) {
     composable(route = listRoute) {
-        ListScreenRoute()
+        ListScreenRoute(navController = navController)
     }
 }

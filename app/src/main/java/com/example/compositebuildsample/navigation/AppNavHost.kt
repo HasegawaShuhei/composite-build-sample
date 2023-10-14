@@ -13,7 +13,7 @@ fun AppNavHost(navController: NavHostController, startDestination: String = list
         navController = navController,
         startDestination = startDestination,
     ) {
-        listScreen()
+        listScreen(navController = navController)
         detailScreen()
     }
 }
