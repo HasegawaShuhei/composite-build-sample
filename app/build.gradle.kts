@@ -1,5 +1,6 @@
 plugins {
     id("compositebuildsample.android.application")
+    id("compositebuildsample.android.hilt")
 }
 
 android {
@@ -38,5 +39,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
 }

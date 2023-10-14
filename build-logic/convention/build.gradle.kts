@@ -29,5 +29,9 @@ gradlePlugin {
             id = "compositebuildsample.android.library.compose"
             implementationClass = "com.example.compositebuildsample.AndroidLibraryComposePlugin"
         }
+        register("androidHilt") {
+            id = "compositebuildsample.android.hilt"
+            implementationClass = "com.example.compositebuildsample.AndroidHiltPlugin"
+        }
     }
 }
