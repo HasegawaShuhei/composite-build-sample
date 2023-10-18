@@ -49,4 +49,13 @@ class ListViewModel @Inject constructor(
             it.copy(isVisibleDialog = isVisible)
         }
     }
+
+    fun clearProperties() {
+        _uiState.update {
+            it.copy(
+                title = "",
+                description = "",
+            )
+        }
+    }
 }
