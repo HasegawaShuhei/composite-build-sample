@@ -23,6 +23,7 @@ import com.example.compositebuildsample.core.model.Memo
 @Composable
 fun MemoListItem(
     memo: Memo,
+    onTapEdit: (Memo) -> Unit,
     onDelete: (Memo) -> Unit,
 ) {
     Card(modifier = Modifier.fillMaxWidth()) {
@@ -48,7 +49,7 @@ fun MemoListItem(
                 }
             }
             Row {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { onTapEdit(memo) }) {
                     Icon(Icons.Default.Edit, contentDescription = "編集")
                 }
                 IconButton(onClick = { onDelete(memo) }) {
@@ -69,6 +70,7 @@ fun MemoListItemPreview() {
     )
     MemoListItem(
         memo = memo,
+        onTapEdit = {},
         onDelete = {}
     )
 }

@@ -25,12 +25,14 @@ internal fun ListScreenRoute(
     ListScreen(
         navController = navController,
         uiState = uiState,
+        setMemo = viewModel::setMemo,
         upsertMemo = viewModel::upsertMemo,
         onDelete = viewModel::deleteMemo,
         setTitle = viewModel::setTitle,
         setDescription = viewModel::setDescription,
         setDialogVisibility = viewModel::setDialogVisibility,
         clearProperties = viewModel::clearProperties,
+        isEditing = viewModel.isEditing,
     )
 }
 
@@ -38,12 +40,14 @@ internal fun ListScreenRoute(
 fun ListScreen(
     navController: NavController,
     uiState: ListUiState,
+    setMemo: (Memo) -> Unit,
     upsertMemo: () -> Unit,
     onDelete: (Memo) -> Unit,
     setTitle: (String) -> Unit,
     setDescription: (String) -> Unit,
     setDialogVisibility: (Boolean) -> Unit,
     clearProperties: () -> Unit,
+    isEditing: Boolean,
 ) {
     if (uiState.isVisibleDialog) {
         UpsertDialog(
@@ -54,6 +58,7 @@ fun ListScreen(
             setTitle = setTitle,
             setDescription = setDescription,
             clearProperties = clearProperties,
+            isEditing = isEditing,
         )
     }
     Scaffold(
@@ -65,6 +70,10 @@ fun ListScreen(
     ) {
         MemoList(
             memos = uiState.memos,
+            onTapEdit = { it ->
+                setMemo(it)
+                setDialogVisibility(true)
+            },
             onDelete = onDelete,
             modifier = Modifier.padding(it)
         )

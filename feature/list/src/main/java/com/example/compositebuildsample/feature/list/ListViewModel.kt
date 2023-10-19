@@ -26,25 +26,47 @@ class ListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ListUiState())
     val uiState: StateFlow<ListUiState> = _uiState.asStateFlow()
 
+    private val value: ListUiState
+        get() = _uiState.value
+    val isEditing: Boolean
+        get() = value.editingMemo != null
+
     init {
         getMemos()
     }
 
     fun upsertMemo() {
-        viewModelScope.launch {
-            upsertUseCase.invoke(
-                Memo(
-                    id = null,
-                    title = _uiState.value.title,
-                    description = _uiState.value.description,
-                )
+        val memo = if (isEditing) {
+            Memo(
+                id = value.editingMemo!!.id,
+                title = value.title,
+                description = value.description,
             )
+        } else {
+            Memo(
+                id = null,
+                title = value.title,
+                description = value.description
+            )
+        }
+        viewModelScope.launch {
+            upsertUseCase.invoke(memo)
         }
     }
 
     fun deleteMemo(memo: Memo) {
         viewModelScope.launch {
             deleteMemoUseCase.invoke(memo)
+        }
+    }
+
+    fun setMemo(memo: Memo) {
+        _uiState.update {
+            it.copy(
+                editingMemo = memo,
+                title = memo.title,
+                description = memo.description,
+            )
         }
     }
 
@@ -69,6 +91,7 @@ class ListViewModel @Inject constructor(
     fun clearProperties() {
         _uiState.update {
             it.copy(
+                editingMemo = null,
                 title = "",
                 description = "",
             )

@@ -21,6 +21,7 @@ fun UpsertDialog(
     setTitle: (String) -> Unit,
     setDescription: (String) -> Unit,
     clearProperties: () -> Unit,
+    isEditing: Boolean,
 ) {
     DisposableEffect(Unit) {
         onDispose {
@@ -34,7 +35,7 @@ fun UpsertDialog(
                 upsertMemo()
                 setDialogVisibility(false)
             }) {
-                Text(text = "OK")
+                Text(text = if (isEditing) "保存" else "作成")
             }
         },
         dismissButton = {
@@ -43,7 +44,7 @@ fun UpsertDialog(
             }
         },
         title = {
-            Text("新規作成")
+            Text(text = if (isEditing) "編集" else "新規作成")
         },
         text = {
             Column {
