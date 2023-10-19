@@ -2,23 +2,32 @@ package com.example.compositebuildsample.feature.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.compositebuildsample.core.domain.usecase.GetMemosUseCase
 import com.example.compositebuildsample.core.domain.usecase.UpsertMemoUseCase
 import com.example.compositebuildsample.core.model.Memo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.forEach
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
+    private val getMemosUseCase: GetMemosUseCase,
     private val upsertUseCase: UpsertMemoUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ListUiState())
     val uiState: StateFlow<ListUiState> = _uiState.asStateFlow()
+
+    init {
+        getMemos()
+    }
 
     fun upsertMemo() {
         viewModelScope.launch {
@@ -58,4 +67,15 @@ class ListViewModel @Inject constructor(
             )
         }
     }
+
+    private fun getMemos() {
+        getMemosUseCase().onEach { memos ->
+            _uiState.update { state ->
+                state.copy(
+                    memos = memos
+                )
+            }
+        }.launchIn(viewModelScope)
+    }
+
 }
