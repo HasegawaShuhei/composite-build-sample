@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.compositebuildsample.core.model.Memo
 import com.example.compositebuildsample.feature.list.components.MemoList
 import com.example.compositebuildsample.feature.list.components.UpsertDialog
 
@@ -25,6 +26,7 @@ internal fun ListScreenRoute(
         navController = navController,
         uiState = uiState,
         upsertMemo = viewModel::upsertMemo,
+        onDelete = viewModel::deleteMemo,
         setTitle = viewModel::setTitle,
         setDescription = viewModel::setDescription,
         setDialogVisibility = viewModel::setDialogVisibility,
@@ -37,6 +39,7 @@ fun ListScreen(
     navController: NavController,
     uiState: ListUiState,
     upsertMemo: () -> Unit,
+    onDelete: (Memo) -> Unit,
     setTitle: (String) -> Unit,
     setDescription: (String) -> Unit,
     setDialogVisibility: (Boolean) -> Unit,
@@ -62,6 +65,7 @@ fun ListScreen(
     ) {
         MemoList(
             memos = uiState.memos,
+            onDelete = onDelete,
             modifier = Modifier.padding(it)
         )
     }

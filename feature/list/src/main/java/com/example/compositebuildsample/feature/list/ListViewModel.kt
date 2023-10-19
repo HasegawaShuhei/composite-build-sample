@@ -2,6 +2,7 @@ package com.example.compositebuildsample.feature.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.compositebuildsample.core.domain.usecase.DeleteMemoUseCase
 import com.example.compositebuildsample.core.domain.usecase.GetMemosUseCase
 import com.example.compositebuildsample.core.domain.usecase.UpsertMemoUseCase
 import com.example.compositebuildsample.core.model.Memo
@@ -9,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -20,6 +20,7 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getMemosUseCase: GetMemosUseCase,
     private val upsertUseCase: UpsertMemoUseCase,
+    private val deleteMemoUseCase: DeleteMemoUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ListUiState())
@@ -38,6 +39,12 @@ class ListViewModel @Inject constructor(
                     description = _uiState.value.description,
                 )
             )
+        }
+    }
+
+    fun deleteMemo(memo: Memo) {
+        viewModelScope.launch {
+            deleteMemoUseCase.invoke(memo)
         }
     }
 

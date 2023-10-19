@@ -12,6 +12,7 @@ import com.example.compositebuildsample.core.model.Memo
 @Composable
 fun MemoList(
     memos: List<Memo>,
+    onDelete: (Memo) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -22,7 +23,10 @@ fun MemoList(
         items(
             count = memos.size,
         ) {
-            MemoListItem(memo = memos[it])
+            MemoListItem(
+                memo = memos[it],
+                onDelete = onDelete,
+            )
         }
     }
 }
