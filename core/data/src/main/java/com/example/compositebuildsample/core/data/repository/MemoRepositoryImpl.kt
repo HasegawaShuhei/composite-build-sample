@@ -19,6 +19,10 @@ class MemoRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getMemoById(id: Int): Flow<Memo> {
+        return memoDao.getMemoById(id).map { it.asExternalModel() }
+    }
+
     override suspend fun upsert(memo: Memo) {
         memoDao.upsert(memo.asEntity())
     }

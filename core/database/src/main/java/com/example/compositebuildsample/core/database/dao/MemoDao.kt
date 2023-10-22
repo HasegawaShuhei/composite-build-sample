@@ -18,4 +18,7 @@ interface MemoDao {
 
     @Query("SELECT * FROM memos")
     fun getMemos(): Flow<List<MemoEntity>>
+
+    @Query("SELECT * FROM memos WHERE id = :id")
+    fun getMemoById(id: Int): Flow<MemoEntity>
 }
