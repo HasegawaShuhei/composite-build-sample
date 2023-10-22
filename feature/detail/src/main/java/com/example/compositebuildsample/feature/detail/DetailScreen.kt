@@ -1,5 +1,7 @@
 package com.example.compositebuildsample.feature.detail
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,5 +23,11 @@ fun DetailScreen(
     if (uiState.memo == null) {
         return Text("loading")
     }
-    Text(text = uiState.memo.title)
+    Column {
+        Text(
+            text = uiState.memo.title,
+            style = MaterialTheme.typography.titleLarge,
+        )
+        Text(text = uiState.memo.description)
+    }
 }
