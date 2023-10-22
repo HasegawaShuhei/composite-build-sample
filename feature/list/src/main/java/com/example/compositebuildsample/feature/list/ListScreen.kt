@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compositebuildsample.core.model.Memo
+import com.example.compositebuildsample.feature.detail.navigation.navigateToDetail
 import com.example.compositebuildsample.feature.list.components.MemoList
 import com.example.compositebuildsample.feature.list.components.UpsertDialog
 
@@ -70,6 +71,7 @@ fun ListScreen(
     ) {
         MemoList(
             memos = uiState.memos,
+            onTapItem = { navController.navigateToDetail(it) },
             onTapEdit = { it ->
                 setMemo(it)
                 setDialogVisibility(true)

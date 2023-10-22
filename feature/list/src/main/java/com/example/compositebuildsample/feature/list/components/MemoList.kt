@@ -12,6 +12,7 @@ import com.example.compositebuildsample.core.model.Memo
 @Composable
 fun MemoList(
     memos: List<Memo>,
+    onTapItem: (Int) -> Unit,
     onTapEdit: (Memo) -> Unit,
     onDelete: (Memo) -> Unit,
     modifier: Modifier = Modifier,
@@ -26,6 +27,7 @@ fun MemoList(
         ) {
             MemoListItem(
                 memo = memos[it],
+                onTapItem = onTapItem,
                 onTapEdit = onTapEdit,
                 onDelete = onDelete,
             )

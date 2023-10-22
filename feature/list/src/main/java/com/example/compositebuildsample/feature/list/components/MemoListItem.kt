@@ -1,5 +1,6 @@
 package com.example.compositebuildsample.feature.list.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,10 +24,15 @@ import com.example.compositebuildsample.core.model.Memo
 @Composable
 fun MemoListItem(
     memo: Memo,
+    onTapItem: (Int) -> Unit,
     onTapEdit: (Memo) -> Unit,
     onDelete: (Memo) -> Unit,
 ) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onTapItem(memo.id!!) }
+    ) {
         Row(
             modifier = Modifier
                 .padding(8.dp)
@@ -70,6 +76,7 @@ fun MemoListItemPreview() {
     )
     MemoListItem(
         memo = memo,
+        onTapItem = {},
         onTapEdit = {},
         onDelete = {}
     )
